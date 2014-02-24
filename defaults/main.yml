@@ -1,0 +1,8 @@
+---
+# default variables
+#   these are accessable during the plays
+#   these may get overridden in site-, playbook-, host- or group vars
+packerio_mirror: 'http://dl.bintray.com/mitchellh/packer/'
+packerio_version: '0.5.2'
+packerio_bin_path: '/usr/local/bin'
+packerio_install_dir: '/usr/lib/packerio'

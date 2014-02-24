@@ -1,0 +1,2 @@
+packerio_filename: "{{ packerio_version }}_darwin_amd64.zip"
+packerio_sha256sum: '1c3c881c4a29cc71617a87503557df684977d86b966f5ed0273298e2f6221594'
