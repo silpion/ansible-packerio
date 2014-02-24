@@ -2,3 +2,4 @@
 # Static variables/constants.
 #   Version of our role.
 packerio_role_version: '0.1.0'
+packerio_install_dir: '/opt/packerio'
