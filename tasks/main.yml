@@ -47,11 +47,20 @@
     dest={{ packerio_install_dir }}
 
 
+#   We'll only unpack the archive if a local version is not the same
+#     as a requested version.
+- name: Find local packer version
+  tags: packerio
+  command: packer --version
+  register: packerio_local_version
+
+
 - name: Install packer
   tags: packerio
   unarchive:
     src=/usr/local/src/packerio/{{ packerio_filename }}
     dest={{ packerio_install_dir }}
+  when: packerio_version not in packerio_local_version.stdout 
 
 
 #   Make the packer binares available in $PATH
