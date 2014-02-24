@@ -46,6 +46,7 @@
     mode=0755
     dest={{ packerio_install_dir }}
 
+
 - name: Install packer
   tags: packerio
   unarchive:
@@ -61,4 +62,5 @@
     force=true
     src={{ item }}
     dest="{{ packerio_bin_path }}/{{ item | basename }}"
-  with_fileglob: packerio_install_dir + '/*'
+  with_fileglob: packerio_install_dir + '/packer*'
+  when: packerio_bin_path != packerio_install_dir
