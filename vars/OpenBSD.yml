@@ -1,0 +1,2 @@
+packerio_filename: "{{ packerio_version }}_openbsd_amd64.zip"
+packerio_sha256sum: '7b4a10240da9c4f9ed37ce4b716240fac643c4d1bf02d07b46c15cad4785f053'
