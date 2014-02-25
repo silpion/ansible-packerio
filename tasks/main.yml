@@ -5,7 +5,7 @@
 - name: Fail on unsupported system
   tags: packerio
   fail: msg="System not supported {{ ansible_system }}"
-  when: ansible_system not in ['Linux', 'Darwin']
+  when: ansible_system not in ['Linux', 'Darwin', 'OpenBSD', 'FreeBSD']
 
 - name: Fail on unsupported architecture
   tags: packerio
