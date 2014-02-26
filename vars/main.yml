@@ -3,5 +3,5 @@
 #   Version of our role.
 ansible_data_path: '/usr/local/src/ansible/data'
 
-packerio_role_version: '0.4.0'
+packerio_role_version: '0.4.1'
 packerio_install_dir: '/opt/packerio'
