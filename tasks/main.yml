@@ -26,13 +26,13 @@
     owner=root
     group=root
     mode=0755
-    dest={{ ansible_local_data_path }}
+    dest={{ ansible_data_path }}
 
 - name: Download packer.io distribution
   tags: packerio
   local_action: get_url
     url={{ packerio_mirror }}/{{ packerio_filename }}
-    dest={{ ansible_local_data_path }}/{{ packerio_filename }}
+    dest={{ ansible_data_path }}/{{ packerio_filename }}
     owner=root
     group=root
     mode=0644
