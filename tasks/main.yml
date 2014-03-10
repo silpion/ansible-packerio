@@ -6,7 +6,6 @@
   tags: packerio
   assert:
     that:
-      - ansible_system in ['Linux', 'Darwin', 'OpenBSD', 'FreeBSD']
       - ansible_os_family in ['Archlinux', 'Debian', 'RedHat', 'Suse']
       - ansible_architecture in ['x86_64']
 

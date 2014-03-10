@@ -13,7 +13,7 @@ galaxy_info:
   description: Install the latest version of packer.io.
   company: http://silpion.de
   license: Apache 2
-  min_ansible_version: 1.4
+  min_ansible_version: 1.5
  
   #
   # Below are all platforms currently available. Just uncomment
@@ -46,22 +46,22 @@ galaxy_info:
     - 12.3
     - 13.1
     - 13.2
-  - name: GenericBSD
-    versions:
-    - all
-    - any
-  - name: FreeBSD
-    versions:
-    - all
-    - 8.0
-    - 8.1
-    - 8.2
-    - 8.3
-    - 8.4
-    - 9.0
-    - 9.1
-    - 9.1
-    - 9.2
+  # - name: GenericBSD
+  #   versions:
+  #   - all
+  #   - any
+  # - name: FreeBSD
+  #   versions:
+  #   - all
+  #   - 8.0
+  #   - 8.1
+  #   - 8.2
+  #   - 8.3
+  #   - 8.4
+  #   - 9.0
+  #   - 9.1
+  #   - 9.1
+  #   - 9.2
   - name: Ubuntu
     versions:
     - all
@@ -83,10 +83,10 @@ galaxy_info:
     - 11SP1
     - 11SP2
     - 11SP3
-  - name: GenericLinux
-    versions:
-    - all
-    - any
+  # - name: GenericLinux
+  #   versions:
+  #   - all
+  #   - any
   - name: Debian
     versions:
     - all
