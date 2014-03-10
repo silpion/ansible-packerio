@@ -1,0 +1,5 @@
+---
+packerio_package_manager: apt
+packerio_package_list:
+  - tar
+  - unzip

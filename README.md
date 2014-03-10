@@ -1,13 +1,25 @@
 # ansible-packerio
 
-Install the latest version of packer.io.
+Manage installation of the latest stable version of packer.io.
 
 
 # Role variables
 
-- packerio_mirror     [http://dl.bintray.com/mitchellh/packer/]
-- packerio_version    [0.5.2]
-- packerio_bin_path   [/usr/local/bin]
+## packerio_mirror
+
+Configure a mirror where to download packer.io from.
+* Default: http://dl.bintray.com/mitchellh/packer/
+
+## packerio_version
+
+Configure a version which to download from packer.io.
+* Default: 0.5.2
+
+## packerio_bin_path
+
+Configure the path where the packer.io binares are linked into the
+system PATH.
+* Default: /usr/local/bin
 
 
 # Dependencies

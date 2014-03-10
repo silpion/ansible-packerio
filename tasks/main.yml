@@ -2,20 +2,26 @@
 # Main list of tasks to be executed.
 #
 #   Fail the play if it runs on an unsupported system or architecture.
-- name: Fail on unsupported system
+- name: Assert platform is supported
   tags: packerio
-  fail: msg="System not supported {{ ansible_system }}"
-  when: ansible_system not in ['Linux', 'Darwin', 'OpenBSD', 'FreeBSD']
-
-- name: Fail on unsupported architecture
-  tags: packerio
-  fail: msg="Architeture not supported {{ ansible_architectore }}"
-  when: ansible_architecture not in ['x86_64']
+  assert:
+    that:
+      - ansible_os_family in ['Archlinux', 'Debian', 'RedHat', 'Suse']
+      - ansible_architecture in ['x86_64']
 
 
 #   Packer download link alters based on system and architecture
-- include_vars: ../vars/{{ ansible_system }}.yml
+- include_vars: "{{ ansible_system }}.yml"
   tags: packerio
+
+#   Ensure unarchive modules' dependencies
+- include_vars: "{{ ansible_os_family }}.yml"
+  tags: packerio
+
+- name: Install unarchive module dependencies
+  tags: packerio
+  action: "{{ packerio_package_manager }} state=present name={{ item }}"
+  with_items: packerio_package_list
 
 
 #   Download packer to the local source directory
@@ -48,4 +54,19 @@
     group=root
     mode=0755
     dest={{ packerio_install_dir }}/{{ packerio_version }}
-  notify: unpack packer
+
+- name: Install packer
+  tags: packerio
+  unarchive:
+    src={{ ansible_data_path }}/{{ packerio_filename }}
+    dest={{ packerio_install_dir }}/{{ packerio_version }}
+
+- name: Linking binaries into system PATH
+  tags: packerio
+  file:
+    state=link
+    force=true
+    src={{ item }}
+    dest="{{ packerio_bin_path }}/{{ item | basename }}"
+  with_fileglob: packerio_install_dir + '/' + packerio_version + '/packer*'
+  when: packerio_bin_path != packerio_install_dir
