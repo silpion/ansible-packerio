@@ -29,8 +29,8 @@
   tags: packerio
   local_action: file
     state=directory
-    owner=root
-    group=root
+    owner=0
+    group=0
     mode=0755
     dest={{ ansible_data_path }}
 
@@ -39,8 +39,8 @@
   local_action: get_url
     url={{ packerio_mirror }}/{{ packerio_filename }}
     dest={{ ansible_data_path }}/{{ packerio_filename }}
-    owner=root
-    group=root
+    owner=0
+    group=0
     mode=0644
     sha256sum={{ packerio_sha256sum }}
 
@@ -50,8 +50,8 @@
   tags: packerio
   file:
     state=directory
-    owner=root
-    group=root
+    owner=0
+    group=0
     mode=0755
     dest={{ packerio_install_dir }}/{{ packerio_version }}
 
