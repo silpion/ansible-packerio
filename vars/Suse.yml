@@ -1,5 +1,4 @@
 ---
-packerio_package_manager: zypper
 packerio_package_list:
   - tar
   - unzip
