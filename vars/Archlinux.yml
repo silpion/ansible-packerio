@@ -1,5 +1,4 @@
 ---
-packerio_package_manager: pacman
 packerio_package_list:
   - tar
   - unzip

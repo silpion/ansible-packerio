@@ -20,7 +20,7 @@
 
 - name: Install unarchive module dependencies
   tags: packerio
-  action: "{{ packerio_package_manager }} state=present name={{ item }}"
+  action: "{{ ansible_pkg_mgr }} state=present name={{ item }}"
   with_items: packerio_package_list
 
 
