@@ -20,12 +20,12 @@
 
 - name: Install unarchive module dependencies
   tags: packerio
-  action: "{{ ansible_pkg_mgr }} state=present name={{ item }}"
   with_items: packerio_package_list
+  action: "{{ ansible_pkg_mgr }} state=present name={{ item }}"
 
 
 #   Download packer to the local source directory
-- name: Ensure local download directory
+- name: Ensure download directory (local)
   tags: packerio
   local_action: file
     state=directory
@@ -34,7 +34,7 @@
     mode=0755
     dest={{ ansible_data_path }}
 
-- name: Download packer.io distribution
+- name: Download packer.io distribution (local)
   tags: packerio
   local_action: get_url
     url={{ packerio_mirror }}/{{ packerio_filename }}
@@ -63,10 +63,10 @@
 
 - name: Linking binaries into system PATH
   tags: packerio
+  when: packerio_bin_path != packerio_install_dir
+  with_fileglob: packerio_install_dir + '/' + packerio_version + '/packer*'
   file:
     state=link
     force=true
     src={{ item }}
-    dest="{{ packerio_bin_path }}/{{ item | basename }}"
-  with_fileglob: packerio_install_dir + '/' + packerio_version + '/packer*'
-  when: packerio_bin_path != packerio_install_dir
+    dest="{{ packerio_bin_path }}/{{ item|basename }}"
