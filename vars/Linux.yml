@@ -1,2 +1,2 @@
 packerio_filename: "{{ packerio_version }}_linux_amd64.zip"
-packerio_sha256sum: '813f856a3d326d2a65f561edac8050d981f93ea51da03b0fb6b3d72010a5fc96'
+packerio_sha256sum: '3c3c2d5fff21e0ba9aa25a18fcdf8ec04fbbd2f7364c74d843124336d1d7b36c'
