@@ -61,12 +61,17 @@
     src={{ ansible_data_path }}/{{ packerio_filename }}
     dest={{ packerio_install_dir }}/{{ packerio_version }}
 
+- name: Gathering installed binaries
+  tags: packerio
+  register: packerio_installed_binaries
+  shell: ls -1 {{ packerio_install_dir }}/{{ packerio_version }}/packer*
+
 - name: Linking binaries into system PATH
   tags: packerio
   when: packerio_bin_path != packerio_install_dir
-  with_fileglob: packerio_install_dir + '/' + packerio_version + '/packer*'
+  with_items: packerio_installed_binaries.stdout_lines
   file:
     state=link
     force=true
     src={{ item }}
-    dest="{{ packerio_bin_path }}/{{ item|basename }}"
+    dest={{ packerio_bin_path }}/{{ item|basename }}
