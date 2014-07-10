@@ -13,7 +13,7 @@ Configure a mirror where to download packer.io from.
 ## packerio_version
 
 Configure a version which to download from packer.io.
-* Default: 0.5.2
+* Default: 0.6.0
 
 ## packerio_bin_path
 
