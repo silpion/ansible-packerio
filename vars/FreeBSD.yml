@@ -1,2 +1,2 @@
 packerio_filename: "{{ packerio_version }}_freebsd_amd64.zip"
-packerio_sha256sum: '882729128297d48db58310684d5343f82b92b8fc094a408b20497cf873145f87'
+packerio_sha256sum: '21ea9231623f156ff1600d60ea024c688a8c526f4cfb62e070e2f158153391e6'
