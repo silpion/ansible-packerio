@@ -9,6 +9,6 @@ describe file('/opt/packerio') do
   it { should be_mode 755 }
 end
 
-describe file('/usr/bin/packer') do
+describe file('/usr/local/bin/packer') do
   it { should be_linked_to '/opt/packerio/0.7.1/packer' }
 end
