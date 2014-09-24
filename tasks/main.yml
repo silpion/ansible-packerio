@@ -32,14 +32,14 @@
     owner=0
     group=0
     mode=2777
-    dest={{ ansible_data_path }}
+    dest={{ local_ansible_data_path }}
 
 - name: Download packer.io distribution (local)
   tags: packerio
   sudo: no
   local_action: get_url
     url={{ packerio_mirror }}/{{ packerio_filename }}
-    dest={{ ansible_data_path }}/{{ packerio_filename }}
+    dest={{ local_ansible_data_path }}/{{ packerio_filename }}
     mode=0644
     sha256sum={{ packerio_sha256sum }}
 
@@ -57,7 +57,7 @@
 - name: Install packer
   tags: packerio
   unarchive:
-    src={{ ansible_data_path }}/{{ packerio_filename }}
+    src={{ local_ansible_data_path }}/{{ packerio_filename }}
     dest={{ packerio_install_dir }}/{{ packerio_version }}
 
 - name: Gathering installed binaries

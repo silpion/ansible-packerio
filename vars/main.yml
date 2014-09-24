@@ -1,4 +1,4 @@
 ---
-ansible_data_path: '/usr/local/src/ansible/data'
+local_ansible_data_path: '/usr/local/src/ansible/data'
 packerio_role_version: '0.10.0'
 packerio_install_dir: '/opt/packerio'
