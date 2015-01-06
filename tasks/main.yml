@@ -6,17 +6,29 @@
   tags: packerio
   assert:
     that:
-      - ansible_os_family in ['Archlinux', 'Debian', 'RedHat', 'Suse']
-      - ansible_architecture in ['x86_64']
+      - ansible_os_family in packerio_supported_platforms
+      - ansible_architecture in packerio_supported_architectures
 
 
 #   Packer download link alters based on system and architecture
-- include_vars: "{{ ansible_system }}.yml"
+- name: Load version vars
   tags: packerio
+  with_first_found:
+    - ../vars/versions/{{ packerio_version }}_{{ ansible_system }}.yml
+    - ../vars/versions/default.yml
+  include_vars: "{{ item }}"
+
+- name: Assert version vars
+  tags: packerio
+  assert:
+    that:
+      packerio_sha256sum not in (None, "")
+
 
 #   Ensure unarchive modules' dependencies
-- include_vars: "{{ ansible_os_family }}.yml"
+- name: Include OS specific vars
   tags: packerio
+  include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Install unarchive module dependencies
   tags: packerio
