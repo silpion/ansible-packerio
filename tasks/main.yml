@@ -6,20 +6,33 @@
   tags: packerio
   assert:
     that:
-      - ansible_os_family in ['Archlinux', 'Debian', 'RedHat', 'Suse']
-      - ansible_architecture in ['x86_64']
+      - ansible_os_family in packerio_supported_platforms
+      - ansible_architecture in packerio_supported_architectures
 
 
 #   Packer download link alters based on system and architecture
-- include_vars: "{{ ansible_system }}.yml"
+- name: Load version vars
   tags: packerio
+  with_first_found:
+    - ../vars/versions/{{ packerio_version }}_{{ ansible_system }}.yml
+    - ../vars/versions/default.yml
+  include_vars: "{{ item }}"
+
+- name: Assert version vars
+  tags: packerio
+  assert:
+    that:
+      packerio_sha256sum not in (None, "")
+
 
 #   Ensure unarchive modules' dependencies
-- include_vars: "{{ ansible_os_family }}.yml"
+- name: Include OS specific vars
   tags: packerio
+  include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Install unarchive module dependencies
   tags: packerio
+  sudo: yes
   with_items: packerio_package_list
   action: "{{ ansible_pkg_mgr }} state=present name={{ item }}"
 
@@ -47,6 +60,7 @@
 #   Install packer
 - name: Ensure installation directory
   tags: packerio
+  sudo: yes
   file:
     state=directory
     owner=0
@@ -56,6 +70,7 @@
 
 - name: Install packer
   tags: packerio
+  sudo: yes
   unarchive:
     src={{ local_ansible_data_path }}/{{ packerio_filename }}
     dest={{ packerio_install_dir }}/{{ packerio_version }}
@@ -67,6 +82,7 @@
 
 - name: Linking binaries into system PATH
   tags: packerio
+  sudo: yes
   when: packerio_bin_path != packerio_install_dir
   with_items: packerio_installed_binaries.stdout_lines
   file:
