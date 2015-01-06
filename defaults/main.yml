@@ -1,4 +1,4 @@
 ---
 packerio_mirror: 'http://dl.bintray.com/mitchellh/packer/'
-packerio_version: '0.7.1'
+packerio_version: '0.7.5'
 packerio_bin_path: '/usr/local/bin'
