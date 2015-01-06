@@ -10,5 +10,9 @@ describe file('/opt/packerio') do
 end
 
 describe file('/usr/local/bin/packer') do
-  it { should be_linked_to '/opt/packerio/0.7.1/packer' }
+  it { should be_linked_to '/opt/packerio/0.7.5/packer' }
+end
+
+describe command('packer version') do
+  its(:stdout) { should match /v0\.7\.5/ }
 end
