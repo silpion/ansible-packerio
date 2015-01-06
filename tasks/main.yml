@@ -32,6 +32,7 @@
 
 - name: Install unarchive module dependencies
   tags: packerio
+  sudo: yes
   with_items: packerio_package_list
   action: "{{ ansible_pkg_mgr }} state=present name={{ item }}"
 
@@ -59,6 +60,7 @@
 #   Install packer
 - name: Ensure installation directory
   tags: packerio
+  sudo: yes
   file:
     state=directory
     owner=0
@@ -68,6 +70,7 @@
 
 - name: Install packer
   tags: packerio
+  sudo: yes
   unarchive:
     src={{ local_ansible_data_path }}/{{ packerio_filename }}
     dest={{ packerio_install_dir }}/{{ packerio_version }}
@@ -79,6 +82,7 @@
 
 - name: Linking binaries into system PATH
   tags: packerio
+  sudo: yes
   when: packerio_bin_path != packerio_install_dir
   with_items: packerio_installed_binaries.stdout_lines
   file:
